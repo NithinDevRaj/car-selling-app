@@ -31,6 +31,7 @@ export default function Profile() {
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
+  
     }
   }, [file]);
 
@@ -64,6 +65,7 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+   
     try {
       dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
