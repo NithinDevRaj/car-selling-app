@@ -5,7 +5,11 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
+import car1 from '../slider/car1.jpg'
+import car2 from '../slider/car2.jpeg'
+import car3 from '../slider/car3.jpg'
 
+const slide =[car1,car2,car3]
 export default function Home() {
 const [salesListing,setSalesListing]=useState([])
   SwiperCore.use([Navigation]);
@@ -31,13 +35,13 @@ const [salesListing,setSalesListing]=useState([])
 
       {/* swiper */}
       <Swiper navigation>
-        {salesListing &&
-          salesListing.length > 0 &&
-          salesListing.map((listing) => (
-            <SwiperSlide key={listing._id}>
+        {slide &&
+          slide.length > 0 &&
+          slide.map((image,index) => (
+            <SwiperSlide key={index}>
               <div
                 style={{
-                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                  background: `url(${image}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
                 className="h-[500px]"
