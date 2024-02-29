@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
+import adminRouter from './routes/admin.route.js'
 import error from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
 import path from "path";
@@ -37,6 +38,7 @@ app.listen(3000, () => {
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+app.use("/api/admin", adminRouter);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 

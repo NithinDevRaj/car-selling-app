@@ -9,6 +9,7 @@ import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaAward } from "react-icons/fa";
+import Header from "../components/Header";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -150,6 +151,8 @@ export default function CreateListing() {
     }
   };
   return (
+    <>
+    <Header/>
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
         Update a Listing
@@ -295,6 +298,6 @@ export default function CreateListing() {
 
       </form>
 
-    </main>
+    </main></>
   );
 }

@@ -5,16 +5,27 @@ import SignUp from "./pages/SignUp";
 import ListView from "./pages/ListViewUser";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
+import Table from './components/admin/Table'
 import PrivateRoute from "./components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
 import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
+import Dashboard from "./pages/admin/Dashboard";
+
 const App = () => {
   return (
     <BrowserRouter>
-      <Header />
+
       <Routes>
+        <Route
+          path="/admin"
+          element={
+            <Dashboard />
+          }
+        >
+          <Route path="/admin/user" element={<Table />} />
+        </Route>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

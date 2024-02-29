@@ -8,28 +8,30 @@ import ListingItem from "../components/ListingItem";
 import car1 from '../slider/car1.jpg'
 import car2 from '../slider/car2.jpeg'
 import car3 from '../slider/car3.jpg'
+import Header from "../components/Header";
 
-const slide =[car1,car2,car3]
+const slide = [car1, car2, car3]
 export default function Home() {
-const [salesListing,setSalesListing]=useState([])
+  const [salesListing, setSalesListing] = useState([])
   SwiperCore.use([Navigation]);
-  
-  // console.log(salesListing);
+
   useEffect(() => {
     const fetchListings = async () => {
       try {
         const res = await fetch("/api/listing/get?limit=4");
         const data = await res.json();
         setSalesListing(data)
-       console.log(data)
+        console.log(data)
       } catch (error) {
         console.log(error);
       }
     };
-  fetchListings()
+    fetchListings()
 
   }, []);
   return (
+    <>
+    <Header/>
     <div>
       {/* top */}
 
@@ -37,7 +39,7 @@ const [salesListing,setSalesListing]=useState([])
       <Swiper navigation>
         {slide &&
           slide.length > 0 &&
-          slide.map((image,index) => (
+          slide.map((image, index) => (
             <SwiperSlide key={index}>
               <div
                 style={{
@@ -45,16 +47,16 @@ const [salesListing,setSalesListing]=useState([])
                   backgroundSize: "cover",
                 }}
                 className="h-[500px]"
-               
+
               ></div>
             </SwiperSlide>
           ))}
       </Swiper>
       <div className=" flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         {/* <h1 className="rounded-lg  text-lime-700 font-bold text-3xl lg:text-6xl">
-          Where Luxury Meets Lifestyle <br />
-          <span className="text-lime-500">Your</span> Dream Home Awaits ....
-        </h1> */}
+        Where Luxury Meets Lifestyle <br />
+        <span className="text-lime-500">Your</span> Dream Home Awaits ....
+      </h1> */}
 
         <Link
           to={"/search"}
@@ -86,9 +88,11 @@ const [salesListing,setSalesListing]=useState([])
             </div>
           </div>
         )}
-      
-     
+
+
       </div>
     </div>
+    </>
+
   );
 }

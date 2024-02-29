@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 export default function About() {
   const { currentUser } = useSelector((state) => state.user);
@@ -46,7 +47,9 @@ export default function About() {
     handleShowListings();
   }, []);
   return (
-    <div className="py-20 px-4 max-w-6xl mx-auto">
+    <>
+    <Header/>
+      <div className="py-20 px-4 max-w-6xl mx-auto">
       <Link
         className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95"
         to={"/create-listing"}
@@ -103,6 +106,7 @@ export default function About() {
           ))}
         </div>
       )}
-    </div>
+    </div></>
+  
   );
 }

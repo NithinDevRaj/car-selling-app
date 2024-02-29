@@ -7,6 +7,7 @@ import {
   signInSuccess,
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
+import Header from "../components/Header";
 const SignIn = () => {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -48,6 +49,8 @@ const SignIn = () => {
   };
 
   return (
+  <>
+  <Header/>
     <div className="p-3 max-w-lg mx-auto mt-20">
       <h1 className="text-3xl text-center my-7">
         <span className="font-bold  text-lime-700">SIGN-IN</span>{" "}
@@ -83,7 +86,7 @@ const SignIn = () => {
         </Link>
       </div>
       {error && <p className="text-red-500">{error}</p>}
-    </div>
+    </div></>
   );
 };
 
