@@ -9,8 +9,8 @@ const test = (req, res) => {
 };
 const updateUserInfo = async (req, res, next) => {
   
-  if (req.user.id !== req.params.id)
-    return next(errorHandler(401, "You can only update your own account!"));
+  // if (req.params.id)
+  //   return next(errorHandler(401, "You can only update your own account!"));
   try {
     if (req.body.password) {
       req.body.password = bcryptjs.hashSync(req.body.password, 10);
@@ -51,7 +51,8 @@ const deleteUser = async (req, res, next) => {
 };
 
 const getUserListings = async (req, res, next) => {
-  if (req.user.id === req.params.id) {
+
+  if (req.params.id) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });
       res.status(200).json(listings);

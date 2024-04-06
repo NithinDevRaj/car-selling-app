@@ -54,7 +54,6 @@ export const updateListing = async (req, res, next) => {
 };
 
 export const getListing = async (req, res, next) => {
-  console.log('nithin rajs ')
   try {
 
     const listing = await Listing.findById(req.params.id);
@@ -82,7 +81,7 @@ export const getListings = async (req, res, next) => {
     const sort = req.query.sort || "createdAt";
 
     const order = req.query.order || "desc";
-
+console.log('ney')
     const listings = await Listing.find({
       model: { $regex: searchTerm, $options: "i" },
     })

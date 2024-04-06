@@ -15,7 +15,7 @@ import {
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 
-const TABLE_HEAD = ["Avatar", "Name", "Email", "Verified"];
+const TABLE_HEAD = ["User", "Car", "Adress", "Verified"];
 
 const TABLE_ROWS = [
   {
@@ -31,48 +31,46 @@ const TABLE_ROWS = [
 ];
 
 export default function TransactionsTable() {
-  const [users, setUsers] = useState([]);
+  const [listings, setListings] = useState([]);
 
   const getUsersHandler = async () => {
     try {
-      console.log("nithin");
-      const result = await fetch("/api/admin/userList");
+      const result = await fetch("/api/admin/listing");
       const data = await result.json();
-      console.log(data);
-      setUsers(data);
+      setListings(data.data);
     } catch (error) {
       console.log(error?.message);
     }
   };
-  console.log(users);
 
   const verifyHandler = async (id, verify) => {
+    verify = !verify;
+    console.log(verify);
     try {
-      const result = await fetch("/api/admin/userList", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id, verify }),
-      });
+      const result = await fetch(`/api/admin/verifyListing/${id}/${verify}`);
+      const res = await result.json();
+      console.log(res);
       getUsersHandler();
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getUsersHandler();
   }, []);
+
   return (
     <Card className="h-screen w-full bg-slate-200 ">
-      <CardHeader floated={false} shadow={false} className="rounded-none bg-amber-400 pl-10">
-        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center ">
-          <div >
-            <Typography variant="h5" color="blue-gray">
-             
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal text-lg">
-              These are details about the {location.pathname.split('/')[2]}
+      <CardHeader
+        floated={false}
+        shadow={false}
+        className="rounded-none bg-amber-400 pl-10"
+      >
+        <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
+          <div>
+            <Typography color="gray" className="mt-1 font-normal ">
+              These are details about the {location.pathname.split("/")[2]}
             </Typography>
           </div>
           <div className="flex w-full shrink-0 gap-2 md:w-max">
@@ -109,31 +107,46 @@ export default function TransactionsTable() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => {
+            {listings.map((item, index) => {
               const isLast = index === TABLE_ROWS.length - 1;
               const classes = isLast
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
 
               return (
-                <tr key={user._id}>
+                <tr key={item._id} >
                   <td className={classes}>
                     <div className="flex items-center gap-3">
                       <Avatar
-                        src={user.avatar}
-                        // alt={user.userName}
+                        src={item?.userRef?.avatar}
+                        alt={item?.userRef?.userName}
                         size="md"
                         className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
                       />
+                      <Typography
+                        variant="small"
+                        color="blue-gray"
+                        className="font-normal"
+                      >
+                        {item?.userRef?.userName}
+                      </Typography>
                     </div>
                   </td>
+
                   <td className={classes}>
                     <Typography
                       variant="small"
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {user.userName}
+                      {" "}
+                      <Avatar
+                        src={item?.imageUrls[0]}
+                        alt={item?.userRef?.userName}
+                        size="md"
+                        className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
+                      />
+                      {item?.company} {item?.model}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -142,7 +155,7 @@ export default function TransactionsTable() {
                       color="blue-gray"
                       className="font-normal"
                     >
-                      {user.email}
+                      {item?.address}{" "}
                     </Typography>
                   </td>
                   <td className={classes}>
@@ -151,16 +164,17 @@ export default function TransactionsTable() {
                       color="blue-gray"
                       className="font-normal"
                       onClick={() => {
-                        verifyHandler(user._id, user.verified);
+                        verifyHandler(item._id, item.verified);
+                        // console.log('clicked')
                       }}
                     >
-                      {user.verified ? (
+                      {item.verified ? (
                         <button className="bg-green-600 h-10 w-20 rounded-xl shadow-lg text-cyan-50">
-                          Block
+                          verified
                         </button>
                       ) : (
                         <button className="bg-red-600 h-10 w-20 rounded-xl shadow-lg text-cyan-50">
-                          Unblock
+                          not verified
                         </button>
                       )}
                     </Typography>

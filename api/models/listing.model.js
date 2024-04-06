@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const listingSchema = new mongoose.Schema(
   {
     company: {
       type: String,
-      required: true
+      required: true,
     },
     model: {
       type: String,
@@ -16,7 +16,7 @@ const listingSchema = new mongoose.Schema(
     },
     verified: {
       type: Boolean,
-      default: false
+      default: false,
     },
     address: {
       type: String,
@@ -28,24 +28,24 @@ const listingSchema = new mongoose.Schema(
     },
     date: {
       type: Number,
-      required: true
+      required: true,
     },
     model: {
       type: String,
-      required: true
+      required: true,
     },
     imageUrls: {
       type: Array,
       required: true,
     },
     userRef: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }
 );
 
-const Listing = mongoose.model('Listing', listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 export default Listing;

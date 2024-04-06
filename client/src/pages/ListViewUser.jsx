@@ -26,6 +26,7 @@ export default function About() {
       console.log(error.message);
     }
   };
+  console.log(currentUser)
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
