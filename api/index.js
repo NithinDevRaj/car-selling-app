@@ -4,11 +4,11 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
-import adminRouter from './routes/admin.route.js'
+import adminRouter from "./routes/admin.route.js";
 import error from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
 import path from "path";
-import cors from 'cors'
+import cors from "cors";
 dotenv.config();
 
 const __dirname = path.resolve();
@@ -28,9 +28,9 @@ mongoose
   });
 // enabling CORS for some specific origins only.
 let corsOptions = {
-  origin: ['*'],
-}
-app.use(cors(corsOptions))
+  origin: ["*"],
+};
+app.use(cors(corsOptions));
 //initialize server
 app.listen(3000, () => {
   console.log("server is running");

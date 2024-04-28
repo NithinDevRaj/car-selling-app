@@ -4,7 +4,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import ListView from "./pages/ListViewUser";
 import Profile from "./pages/Profile";
-import Header from "./components/Header";
 import Table from "./components/admin/Table";
 import PrivateRoute from "./components/PrivateRoute";
 import CreateListing from "./pages/CreateListing";
@@ -13,8 +12,11 @@ import Listing from "./pages/Listing";
 import Search from "./pages/Search";
 import Dashboard from "./pages/admin/Dashboard";
 import VerifyListing from "./components/admin/VerifyListing";
-import { Navigate } from "react-router-dom";
+import Footer from "./components/Footer";
+
 const App = () => {
+
+ 
   return (
     <BrowserRouter>
       <Routes>
@@ -39,6 +41,7 @@ const App = () => {
           />
         </Route>
       </Routes>
+        <Footer />
     </BrowserRouter>
   );
 };
