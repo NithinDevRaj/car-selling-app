@@ -36,7 +36,7 @@ export default function Home() {
         {/* top */}
 
         {/* swiper */}
-        <Swiper navigation>
+        <Swiper navigation >
           {slide &&
             slide.length > 0 &&
             slide.map((image, index) => (
@@ -51,6 +51,7 @@ export default function Home() {
               </SwiperSlide>
             ))}
         </Swiper>
+
         <div className=" flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
           <section className="flex relative mt-20 ">
             <div className=" flex flex-col gap-6 ml-8 justify-center">
