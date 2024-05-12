@@ -13,7 +13,7 @@ dotenv.config();
 
 const __dirname = path.resolve();
 const app = express();
-
+const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,7 +32,7 @@ let corsOptions = {
 };
 app.use(cors(corsOptions));
 //initialize server
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("server is running");
 });
 app.use("/api/user", userRouter);
